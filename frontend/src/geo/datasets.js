@@ -28,6 +28,17 @@ export const GEO_DATASETS = {
       [44.40, -4.50],
     ],
   },
+  cantabria: {
+    id: 'cantabria',
+    label: 'Cantabria',
+    municipiosPath: '/data/cantabria_municipios.geojson',
+    defaultCenter: [43.13587, -4.00071],
+    defaultZoom: 9,
+    maxBounds: [
+      [42.67805, -4.93178],
+      [43.59369, -3.06963],
+    ],
+  },
 }
 
 export const GEO_DATASET_LIST = Object.values(GEO_DATASETS)

@@ -16,8 +16,11 @@ PROVINCE_KEYS = [
     "province", "prov_name", "provincia", "NPRO", "PROVINCIA", "Provincia",
 ]
 CODE_KEYS_TO_KEEP = [
-    "mun_code", "prov_code", "mun_area_code", "codnut1", "codnut2", "codnut3",
-    "acom_code", "acom_name", "ine_code", "source_zone_id",
+    "mun_code", "prov_code", "mun_area_code",
+    "codnut1", "codnut2", "codnut3",
+    "CODNUT1", "CODNUT2", "CODNUT3",
+    "acom_code", "acom_name", "ine_code",
+    "NATCODE", "INSPIREID", "source_zone_id",
 ]
 
 
@@ -68,7 +71,13 @@ def normalize_feature(feature: dict[str, Any], dataset_id: str, province_arg: st
 
     municipio = str(municipio).strip()
     province = str(province).strip()
-    source_zone_id = props.get("zone_id") or props.get("id") or props.get("ID")
+    source_zone_id = (
+        props.get("zone_id")
+        or props.get("NATCODE")
+        or props.get("INSPIREID")
+        or props.get("id")
+        or props.get("ID")
+    )
     zone_id = f"municipality:{slugify(province)}::{slugify(municipio)}"
 
     out_props: dict[str, Any] = {
