@@ -1,0 +1,38 @@
+# Despliegue en Cloudflare Pages
+
+Mapa Apagones está preparado para separar frontend y API.
+
+## Objetivo
+
+- `mapaapagones.es` y `www.mapaapagones.es`: frontend en Cloudflare Pages.
+- `api.mapaapagones.es`: API FastAPI en Raspberry Pi mediante Cloudflare Tunnel.
+
+## Configuración de Cloudflare Pages
+
+Configuración recomendada:
+
+- Root directory: `frontend`
+- Build command: `npm run build`
+- Output directory: `dist`
+
+Variables de entorno del proyecto Pages:
+
+- `VITE_API_BASE_URL=https://api.mapaapagones.es`
+- `VITE_TURNSTILE_SITE_KEY=<site-key-publica-de-turnstile>`
+
+## Configuración de API en producción
+
+La API sigue ejecutándose en la Raspberry con Docker Compose y se expone con Cloudflare Tunnel.
+
+Variables recomendadas del backend:
+
+- `TURNSTILE_ENABLED=1`
+- `TURNSTILE_SECRET_KEY=<secret-key-privada-de-turnstile>`
+- `ALLOWED_ORIGINS=https://mapaapagones.es,https://www.mapaapagones.es`
+- `DEBUG_ENDPOINTS=0`
+
+## Desarrollo local
+
+Si `VITE_API_BASE_URL` está vacío, el frontend usa rutas relativas `/api/...`.
+
+Eso mantiene funcionando el despliegue local actual con Nginx en el puerto `8098`.
