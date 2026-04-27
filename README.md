@@ -165,6 +165,7 @@ Se agradecen contribuciones en:
 - Diseño móvil.
 - Documentación.
 - Despliegue Cloudflare Pages / Tunnel.
+- Guía de Cloudflare Pages: `docs/deployment-cloudflare-pages.md`.
 - Añadir nuevas comunidades autónomas desde la pipeline CNIG.
 - Revisión legal/comunicativa del mensaje público.
 

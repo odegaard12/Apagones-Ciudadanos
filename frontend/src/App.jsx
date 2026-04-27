@@ -10,6 +10,7 @@ import {
 } from './geo/datasets'
 import { loadMunicipiosGeoJson } from './geo/loadGeoDataset'
 import { incidentBelongsToDataset } from './geo/incidentScope'
+import { apiFetch } from './api.js'
 
 const APP_VERSION = 'v0.9.0-geo-north-cyl'
 
@@ -422,7 +423,7 @@ export default function App() {
     const bbox = mapBoundsToBboxParam(mapInstance)
     if (bbox) params.set('bbox', bbox)
 
-    const res = await fetch(`/api/zones?${params.toString()}`)
+    const res = await apiFetch(`/api/zones?${params.toString()}`)
     const data = await res.json()
     if (seq !== incidentsLoadSeqRef.current) return
     setIncidents(Array.isArray(data.items) ? data.items : [])
@@ -684,7 +685,7 @@ export default function App() {
     setMessage('')
 
     try {
-      const res = await fetch('/api/report', {
+      const res = await apiFetch('/api/report', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
