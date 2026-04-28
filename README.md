@@ -2,21 +2,21 @@
 
 Mapa ciudadano de avisos de apagones, cortes eléctricos e incidencias de suministro.
 
-Repositorio público del proyecto que se publicará en:
+Repositorio público del proyecto publicado en:
 
     https://mapa-apagones.es
 
 Estado actual:
 
-    Prelanzamiento técnico. Todavía no está desplegado en el dominio público.
+    Publicado en Cloudflare Pages con dominio público activo.
 
 ## Identidad pública
 
 Antes de seguir con mejoras técnicas, este repositorio deja clara la identidad pública del proyecto:
 
 - Nombre público: Mapa Apagones.
-- Dominio previsto: mapa-apagones.es.
-- Estado actual: prelanzamiento técnico, todavía sin despliegue público en el dominio.
+- Dominio público: mapa-apagones.es.
+- Estado actual: publicado en Cloudflare Pages con API pública mediante Cloudflare Tunnel.
 - Principios de privacidad: sin cuentas, sin CUPS, sin texto libre, sin fotos y sin mostrar viviendas exactas.
 - Licencia: MIT.
 - Cómo puede ayudar otra gente: privacidad, seguridad anti-abuso, accesibilidad, UX móvil, documentación, despliegue y nuevas comunidades autónomas.
@@ -158,7 +158,7 @@ Backend:
     TURNSTILE_SECRET_KEY=
     IGN_WFS_ENABLED=1
 
-Frontend futuro en Cloudflare Pages:
+Frontend en Cloudflare Pages:
 
     VITE_API_BASE_URL=https://api.mapa-apagones.es
     VITE_TURNSTILE_SITE_KEY=...
