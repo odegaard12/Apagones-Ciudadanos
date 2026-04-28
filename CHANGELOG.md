@@ -1,5 +1,24 @@
 # Changelog
 
+## v0.9.2-mobile-report
+
+Fecha: 2026-04-28
+
+### UX móvil / reporte
+
+- Rediseño específico para móvil del flujo de reporte.
+- El panel de reporte deja de comportarse como desktop encogido.
+- En modo reportar se oculta el panel lateral de zonas para ganar espacio.
+- Turnstile usa tamaño compacto en pantallas pequeñas para evitar cortes.
+- Ajuste de alturas, botones, chips, radios y espaciados.
+- Mejora de legibilidad en móvil manteniendo el estilo glass/iPhone.
+
+### Producción
+
+- Mantiene API pública en `https://api.mapa-apagones.es`.
+- Mantiene Turnstile activo para reportes.
+- Mantiene políticas públicas y rutas legales limpias.
+
 ## v0.9.1-public-legal
 
 Fecha: 2026-04-28
