@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.9.5-mobile-usability
+
+Fecha: 2026-04-28
+
+### UX móvil
+
+- Recupera filtros, lista y enlaces legales en móvil dentro de un panel inferior con scroll.
+- Oculta el panel vacío de explorar en móvil.
+- Reportar queda como panel inferior separado.
+- Ajusta Turnstile para que no se corte en PC ni móvil.
+- Usa Turnstile normal en escritorio y compacto en móvil.
+- Reduce textos, botones, chips y espaciados.
+
 ## v0.9.4-mobile-compact-sheet
 
 Fecha: 2026-04-28
