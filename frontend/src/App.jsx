@@ -12,7 +12,7 @@ import { loadMunicipiosGeoJson } from './geo/loadGeoDataset'
 import { incidentBelongsToDataset } from './geo/incidentScope'
 import { apiFetch } from './api.js'
 
-const APP_VERSION = 'v0.9.7.5-turnstile-soft-fallback'
+const APP_VERSION = 'v0.9.7.6-feedback-banners'
 
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || ''
 const TURNSTILE_ENABLED = Boolean(TURNSTILE_SITE_KEY)
@@ -339,7 +339,7 @@ function FeedbackOverlay({ open, title, subtitle, steps = [], activeStep = 0, do
   )
 }
 
-function FloatingToast({ message, tone = 'success' }) {
+function FloatingToast({ message, tone = 'success', onClose = null }) {
   if (!message) return null
 
   const isError = tone === 'error'
@@ -720,7 +720,7 @@ const [mode, setMode] = useState('explore')
   function startTurnstileSubmit(point, type) {
     pendingReportRef.current = { point, type }
     setTurnstilePending(true)
-    setMessage('Preparando reporte…')
+    setMessage('Iniciando reporte…')
 
     const startedAt = Date.now()
     let executed = false
@@ -740,7 +740,7 @@ const [mode, setMode] = useState('explore')
             setTurnstilePending(false)
             setTurnstileToken('')
             resetTurnstileChallenge()
-            setMessage('Continuando con protección local…')
+            setMessage('Guardando reporte…')
             if (pending) {
               sendReport(pending.point, pending.type, null, true)
             }
@@ -751,7 +751,7 @@ const [mode, setMode] = useState('explore')
           pendingReportRef.current = null
           setTurnstilePending(false)
           clearTurnstileSubmitTimeout()
-          setMessage('No se pudo completar la protección del reporte. Inténtalo de nuevo.')
+          setMessage('No se pudo completar el envío. Prueba de nuevo.')
         }
         return
       }
@@ -764,7 +764,7 @@ const [mode, setMode] = useState('explore')
       const pending = pendingReportRef.current
       pendingReportRef.current = null
       setTurnstilePending(false)
-      setMessage('Continuando con protección local…')
+      setMessage('Guardando reporte…')
       if (pending) {
         sendReport(pending.point, pending.type, null, true)
       }
@@ -935,7 +935,7 @@ const [mode, setMode] = useState('explore')
         activeStep={overlayConfig?.activeStep || 0}
         done={Boolean(overlayConfig?.done)}
       />
-      <FloatingToast message={toastMessage} tone={toastTone} />
+      <FloatingToast message={toastMessage} tone={toastTone} onClose={() => { setToastMessage(''); setMessage('') }} />
       <header className="topbar glass">
         <div className="brand-block">
           <div className="brand-logo">⚡</div>
@@ -1175,7 +1175,7 @@ const [mode, setMode] = useState('explore')
               </button>
             </div>
 
-            {message ? <div className="inline-msg">{message}</div> : null}
+            {message && message.includes('Selecciona') ? <div className="inline-msg compact">{message}</div> : null}
           </section>
         ) : selectedIncident ? (
           <section className="right-panel glass">
@@ -1239,7 +1239,7 @@ const [mode, setMode] = useState('explore')
               </button>
             </div>
 
-            {message ? <div className="inline-msg">{message}</div> : null}
+            {message && message.includes('Selecciona') ? <div className="inline-msg compact">{message}</div> : null}
           </section>
         ) : (
           <section className="right-panel glass empty">
@@ -1252,7 +1252,7 @@ const [mode, setMode] = useState('explore')
                 ? 'Usa la lista lateral o pulsa una zona activa.'
                 : 'Pulsa una zona del mapa para reportar.'}
             </div>
-            {message ? <div className="inline-msg">{message}</div> : null}
+            {message && message.includes('Selecciona') ? <div className="inline-msg compact">{message}</div> : null}
           </section>
         )}
       </main>
